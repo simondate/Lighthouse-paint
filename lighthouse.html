@@ -11,6 +11,7 @@
   </head>
   <body>
   <input id="clickMe" type="button" value="clickme" onclick="drawLighthouse();" />
+  <input id="clickMe2" type="button" value="clickme2" onclick="drawLighthouse2();" />
    <canvas id="paintingCanvas" width="1000" height="600" style="border:1px solid grey"></canvas> <!-- The main canvas where the objects to be painted are stored-->
 	<div id="container" style="width:700px">
 	<Canvas id="tealCanvasOutline" width="150" height="150"></Canvas> <!-- Buttons for the user to choose which colour they want-->
@@ -26,34 +27,41 @@
 	<script src="events.js"> </script>
 	
     <script>
-	    
-		function drawLighthouse() {
-				alert("hi");
-				setColour(1,111);
-				}
+	    var events = new Events("paintingCanvas");
+        var canvas = events.getCanvas();
+		var context = events.getContext();
+				
+				
 				
 		
-    window.onload = function(){
-        var events = new Events("paintingCanvas");
-        var canvas = events.getCanvas();
-        var context = events.getContext();
-			
+    function drawLighthouse(){
             events.setStage(function(){
 				this.clear();
-					
-
-					
 					// draws the objects
 				draw(this,0);
 				draw(this,1); 
 				draw(this,2);
 				draw(this,3);
 				draw(this,4);
-				draw(this,5);
-						
-					
-					// function used to draw objects takes in object 'event' and the selected area to be drawn				
-				function draw(object, objectNum){
+				draw(this,5);			
+                });			
+            };
+			
+	    function drawLighthouse2(){
+            events.setStage(function(){
+				this.clear();
+					// draws the objects
+				draw(this,0);
+				draw(this,1); 
+				draw(this,2);
+				draw(this,3);
+		
+                });			
+            };		
+			
+			
+			
+					function draw(object, objectNum){
 					object.beginRegion(); // refrences code in events.js
                     context.beginPath();
 					context.lineWidth = 4;
@@ -114,11 +122,7 @@
 						setColour(objectNum,currentColour);
                     });
                     object.closeRegion();
-					}
-                });			
-            };
-			
-			
+					}		
 
 	
 	var currentColour = 'not set'; 
