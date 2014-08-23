@@ -10,6 +10,7 @@
     </style>
   </head>
   <body>
+  <input id="clickMe" type="button" value="clickme" onclick="drawLighthouse();" />
    <canvas id="paintingCanvas" width="1000" height="600" style="border:1px solid grey"></canvas> <!-- The main canvas where the objects to be painted are stored-->
 	<div id="container" style="width:700px">
 	<Canvas id="tealCanvasOutline" width="150" height="150"></Canvas> <!-- Buttons for the user to choose which colour they want-->
@@ -18,12 +19,20 @@
 	<Canvas id="yellowCanvasOutline" width="150" height="150"></Canvas>
 	</div>
 	
+	<p> created by <a href="http://www.twitter.com/simondate">Simon Date</a>
+	
 	<!-- Libary I found to deal with that can read touch events. Freely avilable here http://www.html5canvastutorials.com/cookbook/#ch6 -->
 	
 	<script src="events.js"> </script>
 	
     <script>
 	    
+		function drawLighthouse() {
+				alert("hi");
+				setColour(1,111);
+				}
+				
+		
     window.onload = function(){
         var events = new Events("paintingCanvas");
         var canvas = events.getCanvas();
@@ -31,8 +40,10 @@
 			
             events.setStage(function(){
 				this.clear();
-				    
-					// drwas the objects
+					
+
+					
+					// draws the objects
 				draw(this,0);
 				draw(this,1); 
 				draw(this,2);
@@ -106,6 +117,9 @@
 					}
                 });			
             };
+			
+			
+
 	
 	var currentColour = 'not set'; 
 	var teal = '#56C7B8';
