@@ -10,8 +10,8 @@
     </style>
   </head>
   <body>
-  <input id="clickMe" type="button" value="clickme" onclick="drawLighthouse();" />
-  <input id="clickMe2" type="button" value="clickme2" onclick="drawLighthouse2();" />
+  <input type="button" value="Lighthouse" onclick="drawLighthouse();" />
+  <input type="button" value="Stickman" onclick="drawStickman();" />
    <canvas id="paintingCanvas" width="1000" height="600" style="border:1px solid grey"></canvas> <!-- The main canvas where the objects to be painted are stored-->
 	<div id="container" style="width:700px">
 	<Canvas id="tealCanvasOutline" width="150" height="150"></Canvas> <!-- Buttons for the user to choose which colour they want-->
@@ -47,20 +47,18 @@
                 });			
             };
 			
-	    function drawLighthouse2(){
+	    function drawStickman(){
             events.setStage(function(){
 				this.clear();
 					// draws the objects
-				draw(this,0);
-				draw(this,1); 
-				draw(this,2);
-				draw(this,3);
-		
+				draw(this,6);
+				draw(this,7);
+				draw(this,8);
+				draw(this,9);
+				draw(this,10);
                 });			
             };		
-			
-			
-			
+
 					function draw(object, objectNum){
 					object.beginRegion(); // refrences code in events.js
                     context.beginPath();
@@ -72,6 +70,7 @@
 					var lighthouseLeft = 250;
 					var lighthouseRight = 500;
 					
+					//Lighthouse
 					if(objectNum == 0){  // Draws the bottom of the lighthouse
 						context.moveTo(lighthouseLeft, 500);
 						context.lineTo(lighthouseLeft, 400);
@@ -105,7 +104,25 @@
 						context.lineTo(470, 460);
 						context.lineTo(550, 500);
 						context.lineTo(640, 600);
-					}					
+						
+						// Stickman
+					} else if(objectNum == 	6){ // head
+						context.arc(500,120,60,0,2*Math.PI);
+					} else if(objectNum == 7) { // body
+						context.rect(467,180,70,250);
+					} else if(objectNum == 	8){ 	// left eye
+						context.arc(480,120,10,0,2*Math.PI);
+					} else if(objectNum == 	9){ 	// right eye
+						context.arc(520,120,10,0,2*Math.PI);
+					} else if(objectNum == 	10){ 	// mouth
+					context.moveTo(480, 150);
+					context.lineTo(520,150);
+					context.lineTo(500,170);
+					
+					}
+	
+
+					
 					context.closePath();
                     context.fill();
                     context.stroke();
