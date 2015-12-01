@@ -1,245 +1,251 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-  <title>
-  Paint the lighthouse!
-  </title>
+
+<head>
+    <title>
+        Paint the lighthouse!
+    </title>
     <style>
-      body {
-      }
+        body {}
     </style>
-  </head>
-  <body>
-  <input type="button" value="Lighthouse" onclick="drawLighthouse();" />
-  <input type="button" value="Stickman" onclick="drawStickman();" />
-   <canvas id="paintingCanvas" width="1000" height="600" style="border:1px solid grey"></canvas> <!-- The main canvas where the objects to be painted are stored-->
-	<div id="container" style="width:700px">
-	<Canvas id="tealCanvasOutline" width="150" height="150"></Canvas> <!-- Buttons for the user to choose which colour they want-->
-	<Canvas id="greenCanvasOutline" width="150" height="150"></Canvas>
-	<Canvas id="pinkCanvasOutline" width="150" height="150"></Canvas>
-	<Canvas id="yellowCanvasOutline" width="150" height="150"></Canvas>
-	</div>
-	
-	<p> created by <a href="http://www.twitter.com/simondate">Simon Date</a>
-	
-	<!-- Libary I found to deal with that can read touch events. Freely avilable here http://www.html5canvastutorials.com/cookbook/#ch6 -->
-	
-	<script src="events.js"> </script>
-	
-    <script>
-	    var events = new Events("paintingCanvas");
-        var canvas = events.getCanvas();
-		var context = events.getContext();
-				
-				
-				
-		
-    function drawLighthouse(){
-            events.setStage(function(){
-				this.clear();
-					// draws the objects
-				draw(this,0);
-				draw(this,1); 
-				draw(this,2);
-				draw(this,3);
-				draw(this,4);
-				draw(this,5);			
-                });			
+</head>
+
+<body>
+    <input type="button" value="Lighthouse" onclick="drawLighthouse();" />
+    <input type="button" value="Stickman" onclick="drawStickman();" />
+    <canvas id="paintingCanvas" width="1000" height="600" style="border:1px solid grey"></canvas>
+    <!-- The main canvas where the objects to be painted are stored-->
+    <div id="container" style="width:700px">
+        <Canvas id="tealCanvasOutline" width="150" height="150"></Canvas>
+        <!-- Buttons for the user to choose which colour they want-->
+        <Canvas id="greenCanvasOutline" width="150" height="150"></Canvas>
+        <Canvas id="pinkCanvasOutline" width="150" height="150"></Canvas>
+        <Canvas id="yellowCanvasOutline" width="150" height="150"></Canvas>
+    </div>
+
+    <p> created by <a href="http://www.twitter.com/simondate">Simon Date</a>
+
+        <!-- Libary I found to deal with that can read touch events. Freely avilable here http://www.html5canvastutorials.com/cookbook/#ch6 -->
+
+        <script src="events.js">
+        </script>
+
+        <script>
+            var events = new Events("paintingCanvas");
+            var canvas = events.getCanvas();
+            var context = events.getContext();
+
+            function drawLighthouse() {
+                events.setStage(function() {
+                    this.clear();
+                    // draws the objects
+                    draw(this, 0);
+                    draw(this, 1);
+                    draw(this, 2);
+                    draw(this, 3);
+                    draw(this, 4);
+                    draw(this, 5);
+                });
             };
-			
-	    function drawStickman(){
-            events.setStage(function(){
-				this.clear();
-					// draws the objects
-				draw(this,6);
-				draw(this,7);
-				draw(this,8);
-				draw(this,9);
-				draw(this,10);
-                });			
-            };		
 
-					function draw(object, objectNum){
-					object.beginRegion(); // refrences code in events.js
-                    context.beginPath();
-					context.lineWidth = 4;
-                    context.strokeStyle = "black";
-					context.fillStyle = '#FFF';
-                    context.fillStyle = getColour(objectNum); // index number retrieves the colour
-					
-					var lighthouseLeft = 250;
-					var lighthouseRight = 500;
-					
-					//Lighthouse
-					if(objectNum == 0){  // Draws the bottom of the lighthouse
-						context.moveTo(lighthouseLeft, 500);
-						context.lineTo(lighthouseLeft, 400);
-						context.quadraticCurveTo(lighthouseLeft + 125, 350, lighthouseRight, 350);
-						context.lineTo(lighthouseRight, 500);
-					} else if(objectNum == 1){ // draws the middle of the lighthouse
-						context.moveTo(lighthouseLeft, 400);
-						context.lineTo(lighthouseLeft, 270);
-						context.quadraticCurveTo(lighthouseLeft + 115, 200, lighthouseRight, 220);
-						context.lineTo(lighthouseRight, 350);
-						context.quadraticCurveTo(lighthouseLeft + 125, 350, lighthouseLeft, 400);
-					} else if(objectNum == 2){ // draws the top of the lighthouse
-						context.moveTo(lighthouseLeft, 270);
-						context.lineTo(lighthouseLeft, 120);
-						context.lineTo(lighthouseRight, 120);
-						context.lineTo(lighthouseRight, 220);
-						context.quadraticCurveTo(lighthouseLeft + 115, 200, lighthouseLeft, 270, 220);
-					} else if(objectNum == 3){ // draws the lightsource
-						context.arc(375, 120, 120, 0, Math.PI, true);
-					} else if(objectNum == 4){ // draws the ray of light
-						context.moveTo(lighthouseRight, 120);
-						context.quadraticCurveTo(lighthouseRight - 4, 110, lighthouseRight - 10, 80);
-						context.lineTo(1000, 0);
-						context.lineTo(1000, 600);
-					} else if(objectNum == 5){ // draws the rocks
-						context.moveTo(90, 600);
-						context.lineTo(90, 480);
-						context.lineTo(170, 520);
-						context.lineTo(280, 460);
-						context.lineTo(320, 500);
-						context.lineTo(470, 460);
-						context.lineTo(550, 500);
-						context.lineTo(640, 600);
-						
-						// Stickman
-					} else if(objectNum == 	6){ // head
-						context.arc(500,120,60,0,2*Math.PI);
-					} else if(objectNum == 7) { // body
-						context.rect(467,180,70,250);
-					} else if(objectNum == 	8){ 	// left eye
-						context.arc(480,120,10,0,2*Math.PI);
-					} else if(objectNum == 	9){ 	// right eye
-						context.arc(520,120,10,0,2*Math.PI);
-					} else if(objectNum == 	10){ 	// mouth
-					context.moveTo(480, 150);
-					context.lineTo(520,150);
-					context.lineTo(500,170);
-					
-					}
-	
+            function drawStickman() {
+                events.setStage(function() {
+                    this.clear();
+                    // draws the objects
+                    draw(this, 6);
+                    draw(this, 7);
+                    draw(this, 8);
+                    draw(this, 9);
+                    draw(this, 10);
+                });
+            };
 
-					
-					context.closePath();
-                    context.fill();
-                    context.stroke();
-					    object.addRegionEventListener("mousedown", function(){ // for mouse input
-                        var mousePos = events.getMousePos();
-                        var mouseX = mousePos.x - 50;
-                        var mouseY = mousePos.y - 50;
-						setColour(objectNum,currentColour);
-                    });
-					   object.addRegionEventListener("touchstart", function(){ // for touch input
-                        var mousePos = events.getMousePos();
-                        var mouseX = mousePos.x - 50; 
-                        var mouseY = mousePos.y - 50;
-						setColour(objectNum,currentColour);
-                    });
-                    object.closeRegion();
-					}		
+            function draw(object, objectNum) {
+                object.beginRegion(); // refrences code in events.js
+                context.beginPath();
+                context.lineWidth = 4;
+                context.strokeStyle = "black";
+                context.fillStyle = '#FFF';
+                context.fillStyle = getColour(objectNum); // index number retrieves the colour
 
-	
-	var currentColour = 'not set'; 
-	var teal = '#56C7B8';
-	var green = '#56C241';
-	var pink = '#EE4C87';
-	var yellow = '#FFCB00';
-	var objectColour = new Array('bot','mid','top','light','ray','rocks');
-	
-		// creates the objects to choose the colour
-      var tealCanvas = document.getElementById('tealCanvasOutline');
-      var tealContext = tealCanvas.getContext('2d');
-	  tealCanvas.addEventListener('click', function() {colourOutlineGrey(),setCurrentColour('teal')}, false);
-      tealContext.beginPath();
-      tealContext.arc(tealCanvas.width/ 2, tealCanvas.height / 2, 70, 0, 2 * Math.PI, false);
-      tealContext.fillStyle = teal;
-      tealContext.fill();
-	  
-	  var greenCanvas = document.getElementById('greenCanvasOutline');
-      var greenContext = greenCanvas.getContext('2d');
-	  greenCanvas.addEventListener('click', function(){colourOutlineGrey(),setCurrentColour('green')}, false);
-      greenContext.beginPath();
-      greenContext.arc(greenCanvas.width/2, greenCanvas.height/2, 70, 0, 2 * Math.PI, false);
-      greenContext.fillStyle = green;
-      greenContext.fill();
-	  
-	  var pinkCanvas = document.getElementById('pinkCanvasOutline');
-      var pinkContext = pinkCanvas.getContext('2d');
-	  pinkCanvas.addEventListener('click', function(){colourOutlineGrey(),setCurrentColour('pink')}, false);
-      pinkContext.beginPath();
-      pinkContext.arc(pinkCanvas.width/2, pinkCanvas.height/2, 70, 0, 2 * Math.PI, false);
-      pinkContext.fillStyle = pink;
-      pinkContext.fill();
-	  
-	  var yellowCanvas = document.getElementById('yellowCanvasOutline');
-      var yellowContext = yellowCanvas.getContext('2d');
-	  yellowCanvas.addEventListener('click', function(){ colourOutlineGrey(),setCurrentColour('yellow')}, false);
-      yellowContext.beginPath();
-      yellowContext.arc(yellowCanvas.width/2, yellowCanvas.height/2, 70, 0, 2 * Math.PI, false);
-      yellowContext.fillStyle = yellow;
-      yellowContext.fill();
-	  
-      colourOutlineGrey();
-	  	  
-	function colourObject(context,colour){
-		message = 'hi'
-		if(colour == 'teal'){
-			context.fillStyle = teal;
-		} else if (colour == 'green'){
-			context.fillStyle = green;
-		} else if (colour == 'pink'){
-			context.fillStyle = pink;
-		} else if (colour == 'yellow'){
-			context.fillStyle = yellow;
-		}
-		context.fill();
-		context.stroke();
-	}  
-	  
-	function colourOutlineGrey(){
-		tealContext.strokeStyle = greenContext.strokeStyle = pinkContext.strokeStyle = yellowContext.strokeStyle = '#444'
-		tealContext.lineWidth = greenContext.lineWidth = pinkContext.lineWidth = yellowContext.lineWidth = 5;
-		tealContext.stroke();
-		greenContext.stroke();
-		yellowContext.stroke();
-		pinkContext.stroke();
-	}		
-	  
-	function setColour(objectNum,currentColour){
-		if(currentColour == 'teal'){
-			objectColour[objectNum] = teal;
-		} else if(currentColour == 'green'){
-			objectColour[objectNum] = green;
-		} else if(currentColour == 'pink'){
-			objectColour[objectNum] = pink;
-		} else if(currentColour == 'yellow'){
-			objectColour[objectNum] = yellow;
-		} else{	
-			objectColour[objectNum] = '#FFF';
-		}
-	}
-	  
-	function getColour(objectNum){
-		return objectColour[objectNum];
-	}
-	  
-	function setCurrentColour(colour){
-		currentColour = colour;
-		if (colour == 'teal'){
-			tealContext.strokeStyle = '#CC0000',tealContext.stroke();
-		}else if(colour == 'green'){
-			greenContext.strokeStyle = '#CC0000',greenContext.stroke();
-		}else if(colour == 'pink'){
-			pinkContext.strokeStyle = '#CC0000',pinkContext.stroke();
-		}else if(colour == 'yellow'){
-			yellowContext.strokeStyle = '#CC0000',yellowContext.stroke();
-		}
-	}
-	  
-    </script>
-  </body>
+                var lighthouseLeft = 250;
+                var lighthouseRight = 500;
+
+                //Lighthouse
+                if (objectNum == 0) { // Draws the bottom of the lighthouse
+                    context.moveTo(lighthouseLeft, 500);
+                    context.lineTo(lighthouseLeft, 400);
+                    context.quadraticCurveTo(lighthouseLeft + 125, 350, lighthouseRight, 350);
+                    context.lineTo(lighthouseRight, 500);
+                } else if (objectNum == 1) { // draws the middle of the lighthouse
+                    context.moveTo(lighthouseLeft, 400);
+                    context.lineTo(lighthouseLeft, 270);
+                    context.quadraticCurveTo(lighthouseLeft + 115, 200, lighthouseRight, 220);
+                    context.lineTo(lighthouseRight, 350);
+                    context.quadraticCurveTo(lighthouseLeft + 125, 350, lighthouseLeft, 400);
+                } else if (objectNum == 2) { // draws the top of the lighthouse
+                    context.moveTo(lighthouseLeft, 270);
+                    context.lineTo(lighthouseLeft, 120);
+                    context.lineTo(lighthouseRight, 120);
+                    context.lineTo(lighthouseRight, 220);
+                    context.quadraticCurveTo(lighthouseLeft + 115, 200, lighthouseLeft, 270, 220);
+                } else if (objectNum == 3) { // draws the lightsource
+                    context.arc(375, 120, 120, 0, Math.PI, true);
+                } else if (objectNum == 4) { // draws the ray of light
+                    context.moveTo(lighthouseRight, 120);
+                    context.quadraticCurveTo(lighthouseRight - 4, 110, lighthouseRight - 10, 80);
+                    context.lineTo(1000, 0);
+                    context.lineTo(1000, 600);
+                } else if (objectNum == 5) { // draws the rocks
+                    context.moveTo(90, 600);
+                    context.lineTo(90, 480);
+                    context.lineTo(170, 520);
+                    context.lineTo(280, 460);
+                    context.lineTo(320, 500);
+                    context.lineTo(470, 460);
+                    context.lineTo(550, 500);
+                    context.lineTo(640, 600);
+
+                    // Stickman
+                } else if (objectNum == 6) { // head
+                    context.arc(500, 120, 60, 0, 2 * Math.PI);
+                } else if (objectNum == 7) { // body
+                    context.rect(467, 180, 70, 250);
+                } else if (objectNum == 8) { // left eye
+                    context.arc(480, 120, 10, 0, 2 * Math.PI);
+                } else if (objectNum == 9) { // right eye
+                    context.arc(520, 120, 10, 0, 2 * Math.PI);
+                } else if (objectNum == 10) { // mouth
+                    context.moveTo(480, 150);
+                    context.lineTo(520, 150);
+                    context.lineTo(500, 170);
+
+                }
+
+
+                context.closePath();
+                context.fill();
+                context.stroke();
+                object.addRegionEventListener("mousedown", function() { // for mouse input
+                    var mousePos = events.getMousePos();
+                    var mouseX = mousePos.x - 50;
+                    var mouseY = mousePos.y - 50;
+                    setColour(objectNum, currentColour);
+                });
+                object.addRegionEventListener("touchstart", function() { // for touch input
+                    var mousePos = events.getMousePos();
+                    var mouseX = mousePos.x - 50;
+                    var mouseY = mousePos.y - 50;
+                    setColour(objectNum, currentColour);
+                });
+                object.closeRegion();
+            }
+
+            var currentColour = 'not set';
+            var teal = '#56C7B8';
+            var green = '#56C241';
+            var pink = '#EE4C87';
+            var yellow = '#FFCB00';
+            var objectColour = new Array('bot', 'mid', 'top', 'light', 'ray', 'rocks');
+
+            // creates the objects to choose the colour
+            var tealCanvas = document.getElementById('tealCanvasOutline');
+            var tealContext = tealCanvas.getContext('2d');
+            tealCanvas.addEventListener('click', function() {
+                colourOutlineGrey(), setCurrentColour('teal')
+            }, false);
+            tealContext.beginPath();
+            tealContext.arc(tealCanvas.width / 2, tealCanvas.height / 2, 70, 0, 2 * Math.PI, false);
+            tealContext.fillStyle = teal;
+            tealContext.fill();
+
+            var greenCanvas = document.getElementById('greenCanvasOutline');
+            var greenContext = greenCanvas.getContext('2d');
+            greenCanvas.addEventListener('click', function() {
+                colourOutlineGrey(), setCurrentColour('green')
+            }, false);
+            greenContext.beginPath();
+            greenContext.arc(greenCanvas.width / 2, greenCanvas.height / 2, 70, 0, 2 * Math.PI, false);
+            greenContext.fillStyle = green;
+            greenContext.fill();
+
+            var pinkCanvas = document.getElementById('pinkCanvasOutline');
+            var pinkContext = pinkCanvas.getContext('2d');
+            pinkCanvas.addEventListener('click', function() {
+                colourOutlineGrey(), setCurrentColour('pink')
+            }, false);
+            pinkContext.beginPath();
+            pinkContext.arc(pinkCanvas.width / 2, pinkCanvas.height / 2, 70, 0, 2 * Math.PI, false);
+            pinkContext.fillStyle = pink;
+            pinkContext.fill();
+
+            var yellowCanvas = document.getElementById('yellowCanvasOutline');
+            var yellowContext = yellowCanvas.getContext('2d');
+            yellowCanvas.addEventListener('click', function() {
+                colourOutlineGrey(), setCurrentColour('yellow')
+            }, false);
+            yellowContext.beginPath();
+            yellowContext.arc(yellowCanvas.width / 2, yellowCanvas.height / 2, 70, 0, 2 * Math.PI, false);
+            yellowContext.fillStyle = yellow;
+            yellowContext.fill();
+
+            colourOutlineGrey();
+
+            function colourObject(context, colour) {
+                message = 'hi'
+                if (colour == 'teal') {
+                    context.fillStyle = teal;
+                } else if (colour == 'green') {
+                    context.fillStyle = green;
+                } else if (colour == 'pink') {
+                    context.fillStyle = pink;
+                } else if (colour == 'yellow') {
+                    context.fillStyle = yellow;
+                }
+                context.fill();
+                context.stroke();
+            }
+
+            function colourOutlineGrey() {
+                tealContext.strokeStyle = greenContext.strokeStyle = pinkContext.strokeStyle = yellowContext.strokeStyle = '#444'
+                tealContext.lineWidth = greenContext.lineWidth = pinkContext.lineWidth = yellowContext.lineWidth = 5;
+                tealContext.stroke();
+                greenContext.stroke();
+                yellowContext.stroke();
+                pinkContext.stroke();
+            }
+
+            function setColour(objectNum, currentColour) {
+                if (currentColour == 'teal') {
+                    objectColour[objectNum] = teal;
+                } else if (currentColour == 'green') {
+                    objectColour[objectNum] = green;
+                } else if (currentColour == 'pink') {
+                    objectColour[objectNum] = pink;
+                } else if (currentColour == 'yellow') {
+                    objectColour[objectNum] = yellow;
+                } else {
+                    objectColour[objectNum] = '#FFF';
+                }
+            }
+
+            function getColour(objectNum) {
+                return objectColour[objectNum];
+            }
+
+            function setCurrentColour(colour) {
+                currentColour = colour;
+                if (colour == 'teal') {
+                    tealContext.strokeStyle = '#CC0000', tealContext.stroke();
+                } else if (colour == 'green') {
+                    greenContext.strokeStyle = '#CC0000', greenContext.stroke();
+                } else if (colour == 'pink') {
+                    pinkContext.strokeStyle = '#CC0000', pinkContext.stroke();
+                } else if (colour == 'yellow') {
+                    yellowContext.strokeStyle = '#CC0000', yellowContext.stroke();
+                }
+            }
+        </script>
+</body>
+
 </html>
-
